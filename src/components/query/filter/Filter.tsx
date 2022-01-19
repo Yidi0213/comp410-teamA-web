@@ -11,8 +11,9 @@ const fields: Field[] = [
   { name: 'longitude', label: 'Longitude' },
   { name: 'latitude', label: 'Latitude' },
   { name: 'date', label:'Date',
-    operators: [{ name: 'between', label: 'is between' }],
-    datatype: 'dateRange',
+    operators: [{ name: '<', label: '<' },
+    { name: '>', label: '>' }],
+    datatype: 'datetime',
     defaultValue:new Date()
   },
 ];

@@ -19,11 +19,16 @@ export const CustomValueEditor = (props: ValueEditorProps) => {
         /> */}
       </div>
     );
-  } else if (props.fieldData.datatype === 'dateRange') {
+  } else if (props.fieldData.datatype === 'datetime') {
     return (
       <div>
-          {/* @ts-ignore */}
-          <DateTimePicker value = {props.value} disableCalendar={true} clearIcon = {null} onChange = {(q)=>{console.log(q);props.handleOnChange(new Date(q));}} />
+          <DateTimePicker 
+            value = {props.value} 
+            disableCalendar={true} 
+            clearIcon = {null} 
+            disableClock = {true}
+            //@ts-ignore
+            onChange = {(q)=>{console.log(q);props.handleOnChange(new Date(q));}} />
         {/* <DatePicker
           selectsRange
           dateFormat={dateFormat}
