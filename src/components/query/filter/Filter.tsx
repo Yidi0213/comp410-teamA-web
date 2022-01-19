@@ -1,13 +1,20 @@
 import React from 'react';
 import { useState } from 'react';
 import QueryBuilder, { Field, RuleGroupType, NameLabelPair,formatQuery } from 'react-querybuilder';
+import {CustomValueEditor} from './CustomValueEditor';
 import 'react-querybuilder/dist/query-builder.scss';
 
+const ONE_EQUAL_ONE = '(1 = 1)'
 const fields: Field[] = [
-  { name: 'userName', label: 'User Name' },
+  { name: 'userName', label: 'User Name',
+    operators:[{ name: '=', label: '=' },{name: '!=', label: '!=' }] },
   { name: 'longitude', label: 'Longitude' },
   { name: 'latitude', label: 'Latitude' },
-  { name: 'date', label:'Date'}
+  { name: 'date', label:'Date',
+    operators: [{ name: 'between', label: 'is between' }],
+    datatype: 'dateRange',
+    defaultValue:new Date()
+  },
 ];
 
 const operators: NameLabelPair[] = [
@@ -17,17 +24,29 @@ const operators: NameLabelPair[] = [
     { name: '>', label: '>' },
 ]
 
-export const Filter = ()=>{
+interface Props {
+  onChangeQuery: (q:any)=> void
+}
+
+export const Filter:React.FC<Props> = ({onChangeQuery})=>{
+    const [sqlCode,setSqlCode] = useState("");
     return (
         <div>
-            <h1>Query filter(to be finished)</h1>
+            <h1>Query filter</h1>
             {/*// @ts-ignore */}
             <QueryBuilder 
             enableDragAndDrop={true} 
             fields = {fields} 
             operators = {operators}
-            onQueryChange = {(q)=>{console.log(q);console.log(formatQuery(q,'sql'))}}
+            onQueryChange = {(q)=>{onChangeQuery(q); setSqlCode(formatQuery(q,'sql'))}}
+            controlElements={{
+              addGroupAction: () => null,
+              valueEditor:CustomValueEditor
+            }}
+
             />
+            <h2>{sqlCode.trim()===ONE_EQUAL_ONE?"No filter parameter yet":"SQL representation: "+ sqlCode}</h2>
+            <hr/>
         </div>
       );
 }
