@@ -7,11 +7,11 @@ import 'react-querybuilder/dist/query-builder.scss';
 const ONE_EQUAL_ONE = '(1 = 1)'
 const fields: Field[] = [
   { name: 'userName', label: 'User Name',
-    operators:[{ name: '=', label: '=' },{name: '!=', label: '!=' }] },
+    operators:[{ name: '=', label: '=' }] },
   { name: 'longitude', label: 'Longitude' },
   { name: 'latitude', label: 'Latitude' },
   { name: 'date', label:'Date',
-    operators: [{ name: '<', label: '<' },
+    operators: [{ name: '<=', label: '<=' },
     { name: '>', label: '>' }],
     datatype: 'datetime',
     defaultValue:new Date()
@@ -20,8 +20,7 @@ const fields: Field[] = [
 
 const operators: NameLabelPair[] = [
     { name: '=', label: '=' },
-    { name: '!=', label: '!=' },
-    { name: '<', label: '<' },
+    { name: '<=', label: '<=' },
     { name: '>', label: '>' },
 ]
 
