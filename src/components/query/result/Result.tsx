@@ -193,23 +193,19 @@ const EnhancedTableToolbar = () => {
 };
 
 type Props = {
-    results?: Array<QueryResult>;
+    results: Array<QueryResult>;
 }
 
 export const Result = ({ results }: Props) => {
-
-    if (!results){
-        return null;
-    }
-    const rows = results.map((item, index) =>
-        createData(index, item.userName, item.date, item.location.latitude, item.location.longitude, item.usrMsg)
-    );
-
     const [order, setOrder] = React.useState<Order>('asc');
     const [orderBy, setOrderBy] = React.useState<keyof Data>('date');
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    
+    const rows = results.map((item, index) =>
+        createData(index, item.userName, item.date, item.location.latitude, item.location.longitude, item.usrMsg)
+    );
 
     const handleRequestSort = (
         event: React.MouseEvent<unknown>,
