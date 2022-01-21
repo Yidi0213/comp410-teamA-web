@@ -32,7 +32,7 @@ export const QueryPage = ()=>{
                 if (rule.operator === '=') {
                     body.AND.push({ longitude: [rule.value as number, rule.value as number] });
                 }
-                else if (rule.operator === '<') {
+                else if (rule.operator === '<=') {
                     if (longitudeAbsent) {
                         body.AND.push({ longitude: [null, rule.value as number] });
                         longitudeAbsent = false;
@@ -64,7 +64,7 @@ export const QueryPage = ()=>{
                 if (rule.operator === '=') {
                     body.AND.push({ latitude: [rule.value as number, rule.value as number] });
                 }
-                else if (rule.operator === '<') {
+                else if (rule.operator === '<=') {
                     if (latitudeAbsent) {
                         body.AND.push({ latitude: [null, rule.value as number] });
                         latitudeAbsent = false;
@@ -96,7 +96,7 @@ export const QueryPage = ()=>{
                 if (rule.operator === '=') {
                     body.AND.push({ time: [rule.value as Date, rule.value as Date] });
                 }
-                else if (rule.operator === '<') {
+                else if (rule.operator === '<=') {
                     if (dateAbsent) {
                         body.AND.push({ time: [null, rule.value as Date] });
                         dateAbsent = false;
@@ -144,16 +144,14 @@ export const QueryPage = ()=>{
     }
 
     const queryAPI = ()=>{
+        //@ts-ignore
         const requestOptions = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
+            // method: 'GET',
+            // headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(transformJSONtoAPI())
         };
-        fetch('https://tgw2warmupa.azurewebsites.net/api/querydata', 
-            {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(transformJSONtoAPI())})
+        //@ts-ignore
+        fetch('https://tgw2warmupa.azurewebsites.net/api/querydata', requestOptions)
             .then(response => response.json())
             .then(data => setQueryResult(data));
     }

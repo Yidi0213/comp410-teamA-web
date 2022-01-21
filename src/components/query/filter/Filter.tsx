@@ -4,7 +4,6 @@ import QueryBuilder, { Field, RuleGroupType, NameLabelPair,formatQuery } from 'r
 import {CustomValueEditor} from './CustomValueEditor';
 import 'react-querybuilder/dist/query-builder.scss';
 
-const ONE_EQUAL_ONE = '(1 = 1)'
 const fields: Field[] = [
   { name: 'userName', label: 'User Name',
     operators:[{ name: '=', label: '=' }] },
@@ -19,7 +18,6 @@ const fields: Field[] = [
 ];
 
 const operators: NameLabelPair[] = [
-    { name: '=', label: '=' },
     { name: '<=', label: '<=' },
     { name: '>', label: '>' },
 ]
@@ -29,23 +27,20 @@ interface Props {
 }
 
 export const Filter:React.FC<Props> = ({onChangeQuery})=>{
-    const [sqlCode,setSqlCode] = useState("");
     return (
         <div>
             <h1>Query filter</h1>
             {/*// @ts-ignore */}
             <QueryBuilder 
-            enableDragAndDrop={true} 
             fields = {fields} 
             operators = {operators}
-            onQueryChange = {(q)=>{onChangeQuery(q); setSqlCode(formatQuery(q,'sql'))}}
+            onQueryChange = {(q)=>{onChangeQuery(q);}}
             controlElements={{
               addGroupAction: () => null,
               valueEditor:CustomValueEditor
             }}
 
             />
-            <h2>{sqlCode.trim()===ONE_EQUAL_ONE?"No filter parameter yet":"SQL representation: "+ sqlCode}</h2>
             <hr/>
         </div>
       );
