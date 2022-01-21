@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import {Filter} from './filter/Filter';
 import { Result } from './result/Result';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 export interface Location {
     latitude: number;
@@ -41,8 +45,11 @@ export const QueryPage = ()=>{
     const [queryResult, setQueryResult] = useState([swong, randomdude]);//THIS IS ONLY USED FOR DEVELOPMENT TESTING!!!!!!!!!!!!
     return (
         <div>
-           <Filter onChangeQuery={(q)=>{setQueryParam(q);console.log(q)}}/>
-            <Result results={queryResult} />
+            <Filter onChangeQuery={(q) => { setQueryParam(q); console.log(q) }} />
+
+            <div style={{ width: '75%', margin: 'auto'}}>
+                <Result results={queryResult} />
+            </div>
             <button onClick={() => setQueryResult([ljy])}>Change queryResult FOR TESTING QUERYRESULT CHANGE</button>
             <button onClick={() => setQueryResult([swong, randomdude])}>Back to initial query result FOR TESTING QUERYRESULT CHANGE</button>
         </div>
