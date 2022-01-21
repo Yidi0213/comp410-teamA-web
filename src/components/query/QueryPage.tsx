@@ -182,7 +182,7 @@ export const QueryPage = ()=>{
     }
     return (
         <div>
-            <Filter onChangeQuery={(q) => { setQueryResult(q); console.log(q) }} />
+            <Filter onChangeQuery={(q) => { setQueryFilter(q); console.log(q) }} />
 
             <div style={{ width: '75%', margin: 'auto'}}>
                 <Result results={queryResult} />
