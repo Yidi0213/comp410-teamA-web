@@ -24,8 +24,9 @@ export const QueryPage = ()=>{
         let longitudeAbsent = true;
         let latitudeAbsent = true;
         let dateAbsent = true;
+        let usernameAbsent = true;
         //@ts-ignore
-        for (let rule of queryParam.rules) {
+        for (let rule of queryFilter.rules) {
             if (rule.field === "longitude") {
                 //The value is restricted by bounds
                 if (rule.operator === '=') {
@@ -123,8 +124,17 @@ export const QueryPage = ()=>{
                 }
             }
             else {
-                //The value will have a single value
-                body.AND.push({ userName: rule.value as string });
+                //rule.field = userName
+                if (usernameAbsent) {
+                    body.AND.push({ userName: [rule.value as string] });
+                    usernameAbsent = false;
+                } else {
+                    for (let parameter of body.AND) {
+                        if (parameter.userName !== undefined) {
+                            parameter.userName.push(rule.value as string);
+                        }
+                    }
+                }
             }
         }
 
@@ -151,7 +161,7 @@ export const QueryPage = ()=>{
         <div>
            <Filter onChangeQuery={(q)=>{setQueryFilter(q);console.log(q)}}/>
             <Result results={queryResult} />
-            <button onClick={queryFilter}>Query</button>
+            <button onClick={queryAPI}>Query</button>
         </div>
       );
 }
