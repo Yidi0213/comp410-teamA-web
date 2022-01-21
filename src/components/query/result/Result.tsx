@@ -202,7 +202,9 @@ export const Result = ({ results }: Props) => {
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
-    
+
+    console.log(results);
+    console.log(Array.isArray(results));
     const rows = results.map((item, index) =>
         createData(index, item.userName, item.date, item.location.latitude, item.location.longitude, item.usrMsg)
     );

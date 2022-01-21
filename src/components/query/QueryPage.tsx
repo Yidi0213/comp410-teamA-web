@@ -41,7 +41,7 @@ const ljy: QueryResult = {
 
 export const QueryPage = ()=>{
     const [queryFilter, setQueryFilter] = useState();
-    const [queryResult, setQueryResult] = useState<QueryResult[]>([swong, randomdude,ljy]);
+    const [queryResult, setQueryResult] = useState<Array<QueryResult>>([swong, randomdude,ljy]);
 
     
     function transformJSONtoAPI() {
@@ -171,7 +171,7 @@ export const QueryPage = ()=>{
     const queryAPI = ()=>{
         //@ts-ignore
         const requestOptions = {
-            method: 'GET',
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(transformJSONtoAPI())
         };
@@ -182,7 +182,7 @@ export const QueryPage = ()=>{
     }
     return (
         <div>
-            <Filter onChangeQuery={(q) => { setQueryResult(q); console.log(q) }} />
+            <Filter onChangeQuery={(q) => { setQueryFilter(q);}} />
 
             <div style={{ width: '75%', margin: 'auto'}}>
                 <Result results={queryResult} />
