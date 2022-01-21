@@ -1,5 +1,5 @@
 # Team A warm-up project web
-Resource:
+Resource: 
 [Team A web team page](https://rice.sharepoint.com/sites/CS-COMP410/s22/SitePages/Team-A---WEB-Team.aspx)
 
 # Getting Started with Create React App
