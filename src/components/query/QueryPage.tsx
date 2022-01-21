@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import {Filter} from './filter/Filter';
 import { Result } from './result/Result';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 export interface Location {
     latitude: number;
@@ -157,9 +161,11 @@ export const QueryPage = ()=>{
     }
     return (
         <div>
-           <Filter onChangeQuery={(q)=>{setQueryFilter(q);console.log(q)}}/>
-            <Result results={queryResult} />
-            <button onClick={queryAPI}>Query</button>
+            <Filter onChangeQuery={(q) => { setQueryResult(q); console.log(q) }} />
+
+            <div style={{ width: '75%', margin: 'auto'}}>
+                <Result results={queryResult} />
+            </div>
         </div>
       );
 }
