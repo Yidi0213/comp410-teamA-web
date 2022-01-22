@@ -106,12 +106,12 @@ export const QueryPage = ()=>{
             else {
                 //rule.field = userName
                 if (usernameAbsent) {
-                    body.AND.push({ userNameList: [rule.value as string] });
+                    body.AND.push({ userName: [rule.value as string] });
                     usernameAbsent = false;
                 } else {
                     for (let parameter of body.AND) {
-                        if (parameter.userNameList !== undefined) {
-                            parameter.userNameList.push(rule.value as string);
+                        if (parameter.userName !== undefined) {
+                            parameter.userName.push(rule.value as string);
                         }
                     }
                 }
