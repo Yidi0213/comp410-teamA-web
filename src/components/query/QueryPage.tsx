@@ -38,7 +38,7 @@ export const QueryPage = ()=>{
                         if (rule.operator === '<=') {
                             loc = {location: {latitude: [null, null], longitude: [null, rule.value as number]}}
                         } 
-                        else if (rule.operator === '>') {
+                        else if (rule.operator === '>=') {
                             loc = {location: {latitude: [null, null], longitude: [rule.value as number, null]}}
                         }
                     } 
@@ -46,7 +46,7 @@ export const QueryPage = ()=>{
                         if (rule.operator === '<=') {
                             loc = {location: {latitude: [null, rule.value as number], longitude: [null, null]}}
                         } 
-                        else if (rule.operator === '>') {
+                        else if (rule.operator === '>=') {
                             loc = {location: {latitude: [rule.value as number, null], longitude: [null, null]}}
                         }
                     }
@@ -60,7 +60,7 @@ export const QueryPage = ()=>{
                                 if (rule.operator === '<=') {
                                     parameter.location.longitude[1] = rule.value as number;
                                 } 
-                                else if (rule.operator === '>') {
+                                else if (rule.operator === '>=') {
                                     parameter.location.longitude[0] = rule.value as number;
                                 }
                             } 
@@ -68,7 +68,7 @@ export const QueryPage = ()=>{
                                 if (rule.operator === '<=') {
                                     parameter.location.latitude[1] = rule.value as number;
                                 } 
-                                else if (rule.operator === '>') {
+                                else if (rule.operator === '>=') {
                                     parameter.location.latitude[0] = rule.value as number;
                                 }
                             }
@@ -91,7 +91,7 @@ export const QueryPage = ()=>{
                         }
                     }
                 }
-                else if (rule.operator === '>') {
+                else if (rule.operator === '>=') {
                     if (dateAbsent) {
                         body.AND.push({ time: [(rule.value as Date).toISOString(), "NULL"] });
                         dateAbsent = false;

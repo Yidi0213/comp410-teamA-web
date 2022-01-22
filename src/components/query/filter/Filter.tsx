@@ -14,7 +14,7 @@ const fields: Field[] = [
   {
     name: 'date', label: 'Date',
     operators: [{ name: '<=', label: '<=' },
-    { name: '>', label: '>' }],
+    { name: '>=', label: '>=' }],
     datatype: 'datetime',
     defaultValue: new Date()
   },
@@ -22,7 +22,7 @@ const fields: Field[] = [
 
 const operators: NameLabelPair[] = [
   { name: '<=', label: '<=' },
-  { name: '>', label: '>' },
+  { name: '>=', label: '>=' },
 ]
 
 interface Props {
