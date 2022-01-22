@@ -35,6 +35,7 @@ export const Filter:React.FC<Props> = ({onChangeQuery})=>{
             fields = {fields} 
             operators = {operators}
             onQueryChange = {(q)=>{onChangeQuery(q);}}
+            combinators={[{ name: 'and', label: 'AND' }]}
             controlElements={{
               addGroupAction: () => null,
               valueEditor:CustomValueEditor

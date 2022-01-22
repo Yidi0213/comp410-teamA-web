@@ -5,6 +5,7 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import styles from "./QueryPage.module.css";
 
 export interface Location {
     latitude: number;
@@ -182,11 +183,11 @@ export const QueryPage = ()=>{
     }
     return (
         <div>
-            <Filter onChangeQuery={(q) => { setQueryFilter(q); console.log(q) }} />
-
-            <div style={{ width: '75%', margin: 'auto'}}>
+            <div className={styles.filter}>
+                <Filter onChangeQuery={(q) => { setQueryFilter(q); console.log(q) }} />
                 <Result results={queryResult} />
             </div>
+
             <button onClick={() => setQueryResult([ljy])}>Change queryResult FOR TESTING QUERYRESULT CHANGE</button>
             <button onClick={() => setQueryResult([swong, randomdude])}>Back to initial query result FOR TESTING QUERYRESULT CHANGE</button>
             <button onClick={queryAPI}>Query</button>
