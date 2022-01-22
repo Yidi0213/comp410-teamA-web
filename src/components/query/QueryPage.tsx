@@ -19,9 +19,30 @@ export interface QueryResult {
     usrMsg: string;
 }
 
+/* The following block of OneResult definition is used as dummy data for development testing, delete this when enter production */
+const swong: QueryResult = {
+    userName: "swong",
+    location: { latitude: 100, longitude: 90 },
+    date: "2022-1-19",
+    usrMsg: "hello I'm swong."
+};
+const randomdude: QueryResult = {
+    userName: "not swong",
+    location: { latitude: 20, longitude: 30 },
+    date: "2022-1-18",
+    usrMsg: "hello I'm not swong."
+};
+const ljy: QueryResult = {
+    userName: "ljy",
+    location: { latitude: 39, longitude: 20 },
+    date: "2022-1-17",
+    usrMsg: "this is ljy."
+};
+/* The code above are dummy data */
+
 export const QueryPage = ()=>{
     const [queryFilter, setQueryFilter] = useState();
-    const [queryResult, setQueryResult] = useState<QueryResult[]>([]);
+    const [queryResult, setQueryResult] = useState<QueryResult[]>([swong, randomdude,ljy]);
 
     function transformJSONtoAPI() {
         let body = { AND: Array<any>() };
@@ -143,16 +164,16 @@ export const QueryPage = ()=>{
         }
 
         //Some test codes, delete this
-        // console.log(JSON.stringify(body));
+        console.log(JSON.stringify(body));
         return body;
     }
 
     const queryAPI = () => {
         //@ts-ignore
         const requestOptions = {
-            method: 'POST',
-            // headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify(transformJSONtoAPI()),
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(transformJSONtoAPI())
         };
         //@ts-ignore
         fetch('https://tgw2warmupa.azurewebsites.net/api/querydata', requestOptions)
@@ -165,6 +186,9 @@ export const QueryPage = ()=>{
                 <Filter onChangeQuery={(q) => { setQueryFilter(q); console.log(q) }} />
                 <Result results={queryResult} />
             </div>
+
+            <button onClick={() => setQueryResult([ljy])}>Change queryResult FOR TESTING QUERYRESULT CHANGE</button>
+            <button onClick={() => setQueryResult([swong, randomdude])}>Back to initial query result FOR TESTING QUERYRESULT CHANGE</button>
             <button onClick={queryAPI}>Query</button>
         </div>
     );
