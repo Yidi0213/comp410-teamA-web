@@ -34,18 +34,18 @@ export const QueryPage = ()=>{
                     let loc;
                     if (rule.field === "longitude") {
                         if (rule.operator === '<=') {
-                            loc = {location: {latitude: [null, null], longitude: [null, rule.value as number]}}
+                            loc = {location: {latitude: ["NULL", "NULL"], longitude: ["NULL", rule.value as number]}}
                         } 
                         else if (rule.operator === '>') {
-                            loc = {location: {latitude: [null, null], longitude: [rule.value as number, null]}}
+                            loc = {location: {latitude: ["NULL", "NULL"], longitude: [rule.value as number, "NULL"]}}
                         }
                     } 
                     else {
                         if (rule.operator === '<=') {
-                            loc = {location: {latitude: [null, rule.value as number], longitude: [null, null]}}
+                            loc = {location: {latitude: ["NULL", rule.value as number], longitude: ["NULL", "NULL"]}}
                         } 
                         else if (rule.operator === '>') {
-                            loc = {location: {latitude: [rule.value as number, null], longitude: [null, null]}}
+                            loc = {location: {latitude: [rule.value as number, "NULL"], longitude: ["NULL", "NULL"]}}
                         }
                     }
                     body.AND.push(loc);
@@ -78,26 +78,26 @@ export const QueryPage = ()=>{
                 //The value is restricted by bounds
                 if (rule.operator === '<=') {
                     if (dateAbsent) {
-                        body.AND.push({ date: [null, (rule.value as Date).toISOString()] });
+                        body.AND.push({ time: ["NULL", (rule.value as Date).toISOString()] });
                         dateAbsent = false;
                     }
                     else {
                         for (let parameter of body.AND) {
-                            if (parameter.date !== undefined) {
-                                parameter.date[1] = (rule.value as Date).toISOString();
+                            if (parameter.time !== undefined) {
+                                parameter.time[1] = (rule.value as Date).toISOString();
                             }
                         }
                     }
                 }
                 else if (rule.operator === '>') {
                     if (dateAbsent) {
-                        body.AND.push({ date: [(rule.value as Date).toISOString(), null] });
+                        body.AND.push({ time: [(rule.value as Date).toISOString(), "NULL"] });
                         dateAbsent = false;
                     }
                     else {
                         for (let parameter of body.AND) {
-                            if (parameter.date !== undefined) {
-                                parameter.date[0] = (rule.value as Date).toISOString();
+                            if (parameter.time !== undefined) {
+                                parameter.time[0] = (rule.value as Date).toISOString();
                             }
                         }
                     }
