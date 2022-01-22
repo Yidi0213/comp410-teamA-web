@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Filter} from './filter/Filter';
+import { Filter } from './filter/Filter';
 import { Result } from './result/Result';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -40,11 +40,11 @@ const ljy: QueryResult = {
 };
 /* The code above are dummy data */
 
-export const QueryPage = ()=>{
+export const QueryPage = () => {
     const [queryFilter, setQueryFilter] = useState();
-    const [queryResult, setQueryResult] = useState<QueryResult[]>([swong, randomdude,ljy]);
+    const [queryResult, setQueryResult] = useState<QueryResult[]>([swong, randomdude, ljy]);
 
-    
+
     function transformJSONtoAPI() {
         let body = { AND: Array<any>() };
         let longitudeAbsent = true;
@@ -169,7 +169,7 @@ export const QueryPage = ()=>{
         return body;
     }
 
-    const queryAPI = ()=>{
+    const queryAPI = () => {
         //@ts-ignore
         const requestOptions = {
             method: 'GET',
@@ -192,5 +192,5 @@ export const QueryPage = ()=>{
             <button onClick={() => setQueryResult([swong, randomdude])}>Back to initial query result FOR TESTING QUERYRESULT CHANGE</button>
             <button onClick={queryAPI}>Query</button>
         </div>
-      );
+    );
 }

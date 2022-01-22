@@ -39,7 +39,7 @@ function createData(
     longitude: number,
     usrMsg: string,
 ) {
-    return { index, username, date, latitude, longitude, usrMsg};
+    return { index, username, date, latitude, longitude, usrMsg };
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -58,8 +58,8 @@ function getComparator<Key extends keyof any>(
     order: Order,
     orderBy: Key,
 ): (
-        a: { [key in Key]: number | string | Date},
-        b: { [key in Key]: number | string | Date},
+        a: { [key in Key]: number | string | Date },
+        b: { [key in Key]: number | string | Date },
     ) => number {
     return order === 'desc'
         ? (a, b) => descendingComparator(a, b, orderBy)
@@ -172,22 +172,22 @@ const EnhancedTableToolbar = () => {
                 pl: { sm: 2 },
                 pr: { xs: 1, sm: 1 },
             }}
-        >   
+        >
             <Typography
                 sx={{ flex: '1 1 100%' }}
                 variant="h6"
                 id="tableTitle"
                 component="div"
             >
-                Points
+                Query Data
             </Typography>
-                
+
             <Tooltip title="Filter list">
                 <IconButton>
                     <FilterListIcon />
                 </IconButton>
             </Tooltip>
-                
+
         </Toolbar>
     );
 };
@@ -202,7 +202,7 @@ export const Result = ({ results }: Props) => {
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
-    
+
     const rows = results.map((item, index) =>
         createData(index, item.userName, item.date, item.location.latitude, item.location.longitude, item.usrMsg)
     );
