@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Filter} from './filter/Filter';
+import { Filter } from './filter/Filter';
 import { Result } from './result/Result';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -23,7 +23,6 @@ export const QueryPage = ()=>{
     const [queryFilter, setQueryFilter] = useState();
     const [queryResult, setQueryResult] = useState<QueryResult[]>([]);
 
-    
     function transformJSONtoAPI() {
         let body = { AND: Array<any>() };
         let longitudeAbsent = true;
@@ -148,7 +147,7 @@ export const QueryPage = ()=>{
         return body;
     }
 
-    const queryAPI = ()=>{
+    const queryAPI = () => {
         //@ts-ignore
         const requestOptions = {
             method: 'POST',
@@ -168,5 +167,5 @@ export const QueryPage = ()=>{
             </div>
             <button onClick={queryAPI}>Query</button>
         </div>
-      );
+    );
 }
