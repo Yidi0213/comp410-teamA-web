@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import QueryBuilder, { Field, RuleGroupType, NameLabelPair, formatQuery } from 'react-querybuilder';
+import QueryBuilder, { Field, RuleGroupType, NameLabelPair, RuleValidator,ValidationResult} from 'react-querybuilder';
 import { CustomValueEditor } from './CustomValueEditor';
 import 'react-querybuilder/dist/query-builder.scss';
 
@@ -9,7 +9,7 @@ const fields: Field[] = [
     name: 'userName', label: 'User Name',
     operators: [{ name: '=', label: '=' }]
   },
-  { name: 'longitude', label: 'Longitude' },
+  { name: 'longitude', label: 'Longitude'},
   { name: 'latitude', label: 'Latitude' },
   {
     name: 'date', label: 'Date',

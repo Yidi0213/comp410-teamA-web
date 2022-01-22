@@ -6,6 +6,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import styles from "./QueryPage.module.css";
+import { DoubleArrow } from '@mui/icons-material';
 
 export interface Location {
     latitude: number;
@@ -22,6 +23,7 @@ export interface QueryResult {
 export const QueryPage = ()=>{
     const [queryFilter, setQueryFilter] = useState();
     const [queryResult, setQueryResult] = useState<QueryResult[]>([]);
+    const [validation,setValidation] = useState(true);
     function transformJSONtoAPI() {
         let body = { AND: Array<any>() };
         let dateAbsent = true;
@@ -34,18 +36,18 @@ export const QueryPage = ()=>{
                     let loc;
                     if (rule.field === "longitude") {
                         if (rule.operator === '<=') {
-                            loc = {location: {latitude: ["NULL", "NULL"], longitude: ["NULL", rule.value as number]}}
+                            loc = {location: {latitude: [null, null], longitude: [null, rule.value as number]}}
                         } 
                         else if (rule.operator === '>') {
-                            loc = {location: {latitude: ["NULL", "NULL"], longitude: [rule.value as number, "NULL"]}}
+                            loc = {location: {latitude: [null, null], longitude: [rule.value as number, null]}}
                         }
                     } 
                     else {
                         if (rule.operator === '<=') {
-                            loc = {location: {latitude: ["NULL", rule.value as number], longitude: ["NULL", "NULL"]}}
+                            loc = {location: {latitude: [null, rule.value as number], longitude: [null, null]}}
                         } 
                         else if (rule.operator === '>') {
-                            loc = {location: {latitude: [rule.value as number, "NULL"], longitude: ["NULL", "NULL"]}}
+                            loc = {location: {latitude: [rule.value as number, null], longitude: [null, null]}}
                         }
                     }
                     body.AND.push(loc);
@@ -123,7 +125,22 @@ export const QueryPage = ()=>{
         return body;
     }
 
+    function queryValidation() {
+        //@ts-ignore
+        for (let rule of queryFilter.rules){
+            if (["longitude","latitude"].includes(rule.field)){
+                if(isNaN(rule.value) || (parseFloat(rule.value) <-180 || parseFloat(rule.value)>180)){
+                    return false
+                }
+            }
+        }
+        return true
+    }
     const queryAPI = () => {
+        setValidation(queryValidation());
+        if(!queryValidation()){
+            return false
+        }
         //@ts-ignore
         const requestOptions = {
             method: 'POST',
@@ -143,6 +160,7 @@ export const QueryPage = ()=>{
             </div>
 
             <button onClick={queryAPI}>Query</button>
+            {validation?null:<h3 className={styles.errorMsg}>Query Error: longitude and latitude should be a number between -180 and 180.</h3>}
         </div>
     );
 }

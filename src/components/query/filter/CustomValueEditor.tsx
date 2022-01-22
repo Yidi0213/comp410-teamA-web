@@ -14,9 +14,9 @@ export const CustomValueEditor = (props: ValueEditorProps) => {
             clearIcon = {null} 
             disableClock = {true}
             //@ts-ignore
-            onChange = {(q)=>{console.log(q);props.handleOnChange(new Date(q));}} />
+            onChange = {(q)=>{props.handleOnChange(new Date(q));}} />
       </div>
     );
-  }
+  } 
   return <ValueEditor {...props} />;
 };
