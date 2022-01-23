@@ -6,6 +6,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import styles from "./QueryPage.module.css";
+import CircularProgress from '@mui/material/CircularProgress';
 
 export interface Location {
     latitude: number;
@@ -23,6 +24,8 @@ export const QueryPage = ()=>{
     const [queryFilter, setQueryFilter] = useState();
     const [queryResult, setQueryResult] = useState<QueryResult[]>([]);
     const [validation,setValidation] = useState(true);
+    const [loading,setLoading] = useState(false);
+
     function transformJSONtoAPI() {
         let body = { AND: Array<any>() };
         let dateAbsent = true;
@@ -138,6 +141,7 @@ export const QueryPage = ()=>{
         if(!queryValidation()){
             return false
         }
+        setLoading(true);
         //@ts-ignore
         const requestOptions = {
             method: 'POST',
@@ -147,7 +151,7 @@ export const QueryPage = ()=>{
         //@ts-ignore
         fetch('https://tgw2warmupa.azurewebsites.net/api/querydata', requestOptions)
             .then(response => response.json())
-            .then(data => setQueryResult(data));
+            .then(data => {setQueryResult(data);setLoading(false)});
     }
     return (
         <div>
@@ -157,8 +161,10 @@ export const QueryPage = ()=>{
                 </div>
                 <Result results={queryResult} />
             </div>
-
-            <button onClick={queryAPI}>Query</button>
+            {/*// @ts-ignore */}
+            {loading 
+            ? <CircularProgress />
+            :<button onClick={queryAPI}>Query</button>}
             {validation?null:<h3 className={styles.errorMsg}>Query Error: longitude and latitude should be a number between -180 and 180.</h3>}
         </div>
     );
