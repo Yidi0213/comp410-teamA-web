@@ -6,7 +6,6 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import styles from "./QueryPage.module.css";
-import { DoubleArrow } from '@mui/icons-material';
 
 export interface Location {
     latitude: number;
@@ -152,8 +151,10 @@ export const QueryPage = ()=>{
     }
     return (
         <div>
-            <div className={styles.filter}>
-                <Filter onChangeQuery={(q) => { setQueryFilter(q);}} />
+            <div className={styles.query}>
+                <div className={styles.filter}>
+                    <Filter onChangeQuery={(q) => { setQueryFilter(q);}} />
+                </div>
                 <Result results={queryResult} />
             </div>
 
