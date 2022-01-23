@@ -266,7 +266,7 @@ export const Result = ({ results }: Props) => {
                                             key={row.index}
                                         >
 
-                                            <TableCell align="center">{row.date}</TableCell>
+                                            <TableCell align="center">{row.date.replace(/T/," ")}</TableCell>
                                             <TableCell
                                                 component="th"
                                                 id={labelId}

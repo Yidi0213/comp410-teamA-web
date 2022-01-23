@@ -120,8 +120,6 @@ export const QueryPage = ()=>{
             }
         }
 
-        //Some test codes, delete this
-        console.log(JSON.stringify(body));
         return body;
     }
 
@@ -155,7 +153,7 @@ export const QueryPage = ()=>{
     return (
         <div>
             <div className={styles.filter}>
-                <Filter onChangeQuery={(q) => { setQueryFilter(q); console.log(q) }} />
+                <Filter onChangeQuery={(q) => { setQueryFilter(q);}} />
                 <Result results={queryResult} />
             </div>
 
