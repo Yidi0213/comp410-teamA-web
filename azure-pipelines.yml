@@ -9,9 +9,6 @@ trigger:
 pr: 
 - main
 
-variables:
-# - name: System.Debug
-#   value: true
 
 pool:
   vmImage: windows-2019
