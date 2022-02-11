@@ -10,8 +10,8 @@ pr:
 - main
 
 variables:
-- name: System.Debug
-  value: true
+# - name: System.Debug
+#   value: true
 
 pool:
   vmImage: windows-2019
