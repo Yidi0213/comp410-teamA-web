@@ -9,9 +9,16 @@ trigger:
 pr: 
 - main
 
+variables:
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+  # Project root folder. Point to the folder containing manage.py file.
+  projectRoot: $(System.DefaultWorkingDirectory)
+
 
 pool:
-  vmImage: windows-2019
+  vmImage: $(vmImageName)
 
 steps:
 - task: NodeTool@0
@@ -25,9 +32,14 @@ steps:
   displayName: 'npm install and build'
 
 - task: ArchiveFiles@2
+  displayName: 'Archive files'
   inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+    rootFolderOrFile: '$(projectRoot)'
     includeRootFolder: false
-- task: PublishPipelineArtifact@0
-  inputs:
-    targetPath: '$(System.ArtifactsDirectory)'
+    archiveType: zip
+    archiveFile: $(Build.ArtifactStagingDirectory)/artifact.zip
+    replaceExistingArchive: true
+
+- upload: $(Build.ArtifactStagingDirectory)/artifact.zip
+  displayName: 'Upload package'
+  artifact: drop
