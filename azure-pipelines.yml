@@ -11,7 +11,7 @@ pr:
 
 variables:
   # Agent VM image name
-  vmImageName: 'ubuntu-latest'
+  vmImageName: 'windows-2019'
 
   # Project root folder. Point to the folder containing manage.py file.
   projectRoot: $(System.DefaultWorkingDirectory)
